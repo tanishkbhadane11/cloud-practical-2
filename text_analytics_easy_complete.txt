@@ -1,0 +1,76 @@
+TEXT ANALYTICS PRACTICAL (EASY VERSION)
+
+=============================
+1. PREPROCESSING (NLP)
+=============================
+
+Steps:
+- Tokenization
+- Stopword Removal
+- Stemming
+- Lemmatization
+
+Python Code:
+
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+
+text = "Text analytics is useful for extracting information from text"
+
+# Tokenization
+tokens = word_tokenize(text)
+print("Tokens:", tokens)
+
+# Stopword removal
+stop_words = set(stopwords.words('english'))
+filtered = [w for w in tokens if w.lower() not in stop_words and w.isalpha()]
+print("After Stopwords:", filtered)
+
+# Stemming
+stemmer = PorterStemmer()
+stemmed = [stemmer.stem(w) for w in filtered]
+print("Stemmed:", stemmed)
+
+# Lemmatization
+lemmatizer = WordNetLemmatizer()
+lemmatized = [lemmatizer.lemmatize(w) for w in filtered]
+print("Lemmatized:", lemmatized)
+
+
+=============================
+2. TF-IDF REPRESENTATION
+=============================
+
+Python Code:
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+docs = [
+    "text analytics is useful",
+    "text mining is part of analytics",
+    "analytics helps in data processing"
+]
+
+vectorizer = TfidfVectorizer()
+result = vectorizer.fit_transform(docs)
+
+print("Features:", vectorizer.get_feature_names_out())
+print("TF-IDF Matrix:
+", result.toarray())
+
+
+=============================
+3. VIVA POINTS
+=============================
+
+Tokenization -> splitting text into words
+Stopwords -> removing common words (is, the, and)
+Stemming -> cutting words (running -> run)
+Lemmatization -> correct root word (better -> good)
+TF-IDF -> importance of word in document
